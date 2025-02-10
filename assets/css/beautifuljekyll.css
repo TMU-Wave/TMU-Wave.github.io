@@ -105,7 +105,6 @@ a:focus {
   justify-content: center;
   align-items: center; 
   width: 100%;
-  margin: 20px 0; 
 }
 .instagram-embed h1{
   font-size: 40px;
@@ -274,6 +273,7 @@ img {
 
 .dropdown-toggle::after {
   border-width: 0.4em;
+  margin-left: 5px;
 }
 
 @media (min-width: 1200px) {
