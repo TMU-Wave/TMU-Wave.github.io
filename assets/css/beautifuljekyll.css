@@ -1,53 +1,288 @@
----
-layout: null
----
-
-@import url("pygment_highlights.css");
 
 :root {
-  /* config file CSS variables */
-  --page-col: {{ site.page-col | default: "#FFFFFF" }};
-  --text-col: {{ site.text-col | default: "#404040" }};
-  --link-col: {{ site.link-col | default: "#008AFF" }};
-  --hover-col: {{ site.hover-col | default: "#0085A1" }};
-  --navbar-col: {{ site.navbar-col | default: "#EAEAEA" }};
-  --navbar-text-col: {{ site.navbar-text-col | default: "#404040" }};
-  --navbar-border-col: {{ site.navbar-border-col | default: "#DDDDDD" }};
-  --footer-col: {{ site.footer-col | default: "#EAEAEA" }};
-  --footer-text-col: {{ site.footer-text-col | default: "#777777" }};
-  --footer-link-col: {{ site.footer-link-col | default: "#404040" }};
-  --footer-hover-col: {{ site.footer-hover-col | default: "#0085A1" }};
+ 
+  --page-col: #e6f7ff;
+  --text-col: #44add1;
+  --link-col: #008AFF;
+  --hover-col: #0085A1;
+  --navbar-col: #000b29;
+  --navbar-text-col: #FFFFFF;
+  --navbar-border-col: #DDDDDD;
+  --footer-col: #EAEAEA;
+  --footer-text-col: #777777;
+  --footer-link-col: #404040;
+  --footer-hover-col: #0085A1;
 
-  /* common CSS variables */
   --body-font: 'Open Sans', 'Lora', 'Times New Roman', serif;
   --header-font: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --mid-col: #808080;
+  
+ 
+  --ocean-gradient-start: #182848;
+  --ocean-gradient-end: #2980b9;
+  --bubble-color: rgba(255, 255, 255, 0.2);
 }
 
-/* --- General --- */
 
-html {
-  font-size: 100%
+.ocean {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(0deg, var(--ocean-gradient-start), var(--ocean-gradient-end));
+  z-index: -1; /*important so its kept it behind */
+  overflow: hidden;
 }
+
+/*moving rover*/
+
+.underwater-animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    }
+.rover {
+  position: absolute;
+  bottom: -100px;
+  left: -120px;
+  width: 100px;
+  height: 60px;
+  animation: move-rover 30s linear infinite;
+  z-index: 1;
+}
+
+.rover-body {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  background-color: #44add1;
+  border-radius: 10px;
+  top: 20%;
+}
+
+.rover-light {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ffff99;
+  border-radius: 50%;
+  top: 20px;
+  right: 5px;
+  animation: blink-light 2s ease-in-out infinite;
+}
+
+.rover-propeller {
+  position: absolute;
+  width: 30px;
+  height: 10px;
+  background-color: #555;
+  left: -15px;
+  top: 25px;
+  animation: spin-propeller 0.5s linear infinite;
+}
+
+@keyframes move-rover {
+  0% {
+    bottom: -100px;
+    left: -120px;
+    transform: rotate(10deg);
+  }
+  25% {
+    bottom: 30%;
+    left: 30%;
+    transform: rotate(-5deg);
+  }
+  50% {
+    bottom: 60%;
+    left: 60%;
+    transform: rotate(8deg);
+  }
+  75% {
+    bottom: 40%;
+    left: 80%;
+    transform: rotate(-3deg);
+  }
+  100% {
+    bottom: -100px;
+    left: 110%;
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes blink-light {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes spin-propeller {
+  0% { transform: scaleX(1); }
+  50% { transform: scaleX(1.5); }
+  100% { transform: scaleX(1); }
+}
+
+.bubble {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  position: absolute;
+  background-color: white;
+  bottom: -30px;
+  opacity: 0.2;
+  animation: bubble 15s ease-in-out infinite,
+    sideWays 4s ease-in-out infinite alternate;
+}
+
+@keyframes bubble {
+  0% {
+    transform: translateY(0%);
+    opacity: 0.06;
+  }
+  100% {
+    transform: translateY(-120vh);
+  }
+}
+
+@keyframes sideWays {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 200px;
+  }
+}
+
+
+.bubble--1 {
+  left: 10%;
+  animation-delay: 0.5s;
+  animation-duration: 16s;
+  opacity: 0.2;
+}
+
+.bubble--2 {
+  width: 15px;
+  height: 15px;
+  left: 40%;
+  animation-delay: 1s;
+  animation-duration: 10s;
+  opacity: 0.1;
+}
+
+.bubble--3 {
+  width: 10px;
+  height: 10px;
+  left: 30%;
+  animation-delay: 5s;
+  animation-duration: 20s;
+  opacity: 0.3;
+}
+
+.bubble--4 {
+  width: 25px;
+  height: 25px;
+  left: 40%;
+  animation-delay: 8s;
+  animation-duration: 17s;
+  opacity: 0.2;
+}
+
+.bubble--5 {
+  width: 30px;
+  height: 30px;
+  left: 60%;
+  animation-delay: 10s;
+  animation-duration: 15s;
+  opacity: 0.1;
+}
+
+.bubble--6 {
+  width: 10px;
+  height: 10px;
+  left: 80%;
+  animation-delay: 3s;
+  animation-duration: 30s;
+  opacity: 0.4;
+}
+
+.bubble--7 {
+  width: 15px;
+  height: 15px;
+  left: 90%;
+  animation-delay: -7s;
+  animation-duration: 25s;
+  opacity: 0.3;
+}
+
+.bubble--9 {
+  width: 20px;
+  height: 20px;
+  left: 50%;
+  bottom: 30px;
+  animation-delay: -5s;
+  animation-duration: 19s;
+  opacity: 0.2;
+}
+
+.bubble--10 {
+  width: 40px;
+  height: 40px;
+  left: 30%;
+  bottom: 30px;
+  animation-delay: -21s;
+  animation-duration: 16s;
+  opacity: 0.3;
+}
+
+.bubble--11 {
+  width: 30px;
+  height: 30px;
+  left: 60%;
+  bottom: 30px;
+  animation-delay: -13.75s;
+  animation-duration: 20s;
+  opacity: 0.3;
+}
+
+.bubble--12 {
+  width: 25px;
+  height: 25px;
+  left: 90%;
+  bottom: 30px;
+  animation-delay: -10.5s;
+  animation-duration: 19s;
+  opacity: 0.3;
+}
+
 
 body {
   font-family: var(--body-font);
   font-size: 1.125rem;
-  color: var(--text-col);
+  color: var(--navbar-text-col); 
   position: relative;
-  background-color: var(--page-col);
-  {% if site.page-img %}
-  background-image: url({{ site.page-img | relative_url }});
-  background-attachment: fixed;
-  {% endif %}
+  
   overflow-wrap: break-word;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-body > main {
-  flex: 1;
+
+
+.navbar-custom {
+  background-color: rgba(0, 11, 41, 0.8); 
 }
+
+footer {
+  background-color: rgba(234, 234, 234, 0.9); 
+}
+
+/* Improve link visibility */
+
 p {
   line-height: 1.5;
   margin: 1.875rem 0;
@@ -76,10 +311,13 @@ h1, h2, h3, h4 {
 a {
   color: var(--link-col);
 }
+
 a:hover,
 a:focus {
-  color: var(--hover-col);
+  color: #e6f7ff;
+  text-decoration: underline;
 }
+
 .hero  {
   text-align: center; 
   display: flex;
@@ -134,11 +372,10 @@ hr.small {
   border-radius: 0.1875rem;
 }
 
-/* fix in-page anchors to not be behind fixed header */
 :target:before {
   content: "";
   display: block;
-  height: 3.125rem; /* navbar height */
+  height: 3.125rem; 
   margin: -3.125rem 0 0;
 }
 
@@ -174,7 +411,6 @@ img {
   margin-top: -1.5625rem;
 }
 
-/* Comments */
 
 .disqus-comments {
   margin-top: 1.875rem;
@@ -186,16 +422,12 @@ img {
   }
 }
 
-/* --- Navbar --- */
 
 .navbar-custom {
   background-color: var(--navbar-col);
   border-bottom: 1px solid var(--navbar-border-col);
   font-family: var(--header-font);
-  {% if site.navbar-img %}
-    background-image: url({{ site.navbar-img | relative_url }});
-    background-attachment: fixed;
-  {% endif %}
+  
   -webkit-transition: padding .5s ease-in-out;
   -moz-transition: padding .5s ease-in-out;
   transition: padding .5s ease-in-out;
@@ -316,13 +548,11 @@ img {
   font-size: 1em;
   border: 0;
   padding: 0;
-  {% if site.navbar-var-length %}
-  min-width: 100%;
-  {% else %}
+  
   min-width: 0;
   width: 100%;
   word-break: break-word;
-  {% endif %}
+  
 }
 
 .navbar-custom .nav-item.dropdown .dropdown-menu .dropdown-item {
@@ -331,9 +561,9 @@ img {
   text-decoration: none !important;
   font-weight: normal;
   color: var(--navbar-text-col);
-  {% unless site.navbar-var-length %}
+  
   white-space: normal;
-  {% endunless %}
+  
 }
 
 @media (min-width: 1200px) {
@@ -403,18 +633,18 @@ img {
 .navbar-custom .avatar-container .avatar-img-border {
   width: 100%;
   margin-left: -50%;
-  {% unless site.round-avatar == false %}
+  
     border-radius: 50%;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, .8);
     -webkit-box-shadow: 0 0 0.3125rem rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 0.5rem rgba(0, 0, 0, .8);
-  {% endunless %}
+  
 }
 .navbar-custom .avatar-container .avatar-img {
   width: 100%;
-  {% unless site.round-avatar == false %}
+  
     border-radius: 50%;
-  {% endunless %}
+  
   display: block;
 }
 
@@ -430,11 +660,11 @@ img {
 
   .navbar-custom.top-nav-regular .avatar-container .avatar-img-border {
     width: 100%;
-    {% unless site.round-avatar == false %}
+    
     box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
     -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, .8);
-    {% endunless %}
+    
   }
 
   .navbar-custom.top-nav-regular .avatar-container .avatar-img {
@@ -442,7 +672,7 @@ img {
   }
 }
 
-/* --- Footer --- */
+
 
 footer {
   padding: 1.875rem 0;
@@ -450,10 +680,7 @@ footer {
   margin-top: 3.125rem;
   font-size: 0.875rem;
   background-color: var(--footer-col);
-  {% if site.footer-img %}
-    background-image: url({{ site.footer-img | relative_url }});
-    background-attachment: fixed;
-  {% endif %}
+  
 }
 
 footer p.text-muted {
@@ -511,7 +738,6 @@ footer .footer-custom-content {
   }
 }
 
-/* --- Post preview (feed) --- */
 
 .posts-list {
     margin: 0;
@@ -793,7 +1019,7 @@ nav.top-nav-short-permanent ~ header > .intro-header.big-img {
     margin-top: 8.125rem;
   }
   .intro-header.big-img {
-    margin-top: 5.6875rem; /* Full navbar is small navbar + 20px padding on each side when expanded */
+    margin-top: 5.6875rem; 
   }
   .intro-header.big-img .page-heading,
   .intro-header.big-img .post-heading {
@@ -820,7 +1046,6 @@ nav.top-nav-short-permanent ~ header > .intro-header.big-img {
   }
 }
 
-/* --- Pagination --- */
 
 .pagination {
   margin: 0.625rem 0 0;
@@ -865,7 +1090,7 @@ nav.top-nav-short-permanent ~ header > .intro-header.big-img {
   background-color: var(--hover-col);
 }
 
-/* --- Tables --- */
+/* Tables */
 
 table {
   padding: 0;
@@ -898,7 +1123,7 @@ table tr td :last-child {
   margin-bottom: 0;
 }
 
-/* --- Code blocks --- */
+/* Code blocks */
 
 code {
   padding: 0.125rem 0.25rem;
@@ -932,7 +1157,7 @@ pre {
   border: 1px solid rgba(0,0,0,0.1);
   border-left: 0.4375rem solid #444;
 }
-.highlight > pre:not([class~="highlight"]) { /* code block with line number */
+.highlight > pre:not([class~="highlight"]) {
   padding: 0;
 }
 .highlight table,
@@ -960,8 +1185,6 @@ pre {
   background: none;
 }
 
-/* Fix table border github gist snippets */
-
 .gist, .gist-file table tr {
   border: unset;
 }
@@ -970,7 +1193,7 @@ pre {
   border: unset;
 }
 
-/* --- Social media sharing section --- */
+/*Social media sharing section*/
 
 #social-share-section {
   margin-bottom: 1.875rem;
@@ -981,7 +1204,7 @@ pre {
   color: #fff;
 }
 
-/* --- Notification boxes --- */
+/* notification boxes */
 .box-note,
 .box-warning,
 .box-error,
@@ -1013,7 +1236,6 @@ pre {
   border-left-color: #3CB371;
 }
 
-/* --- Misc blog post styles --- */
 
 .blog-post :first-child {
   margin-top: 0;
