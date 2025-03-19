@@ -35,7 +35,46 @@
   overflow: hidden;
 }
 
+.rover_side { 
+  position: fixed;
+  bottom: -100px;
+  left: -120px;
+  width: 250px;
+  height: 100px;
+  animation: move-rover 30s linear infinite;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
 
+@keyframes move-rover {
+  0% {
+    bottom: -100px;
+    left: -120px;
+    transform: rotate(10deg);
+  }
+  25% {
+    bottom: 30%;
+    left: 30%;
+    transform: rotate(-5deg);
+  }
+  50% {
+    bottom: 60%;
+    left: 60%;
+    transform: rotate(8deg);
+  }
+  75% {
+    bottom: 40%;
+    left: 80%;
+    transform: rotate(-3deg);
+  }
+  100% {
+    bottom: -100px;
+    left: 110%;
+    transform: rotate(10deg);
+  }
+}
 
 .bubble {
   width: 30px;
